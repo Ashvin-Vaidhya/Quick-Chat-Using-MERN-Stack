@@ -59,7 +59,7 @@ if (process.env.NODE_ENV === "production") {
   const rootDist = path.join(__dirname, 'dist');
   const frontendDistPath = fs.existsSync(rootDist) ? rootDist : path.join(__dirname, 'FrontEnd', 'quichChat-fronEnd', 'dist');
   app.use(express.static(frontendDistPath));
-  app.get('*', (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(frontendDistPath, 'index.html'));
   });
 }
