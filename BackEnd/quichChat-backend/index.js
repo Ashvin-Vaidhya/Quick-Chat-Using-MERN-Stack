@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import http from 'http';
+import path from 'path';
 import { Server } from 'socket.io';
 import connectDB from './lib/conectDB.js';
 import userRouter from './routes/userRoutes.js';
@@ -10,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-
+const __dirname = path.resolve();
 
 const port = process.env.PORT || 3000;
 
@@ -52,8 +53,14 @@ connectDB()
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter)
 
-
-
+// Serve frontend static assets in production
+if (process.env.NODE_ENV === "production") {
+  const frontendDistPath = path.join(__dirname, 'FrontEnd', 'quichChat-fronEnd', 'dist');
+  app.use(express.static(frontendDistPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
+  });
+}
 
 server.listen(port, () => {
 console.log(`Server is running on port ${port}`);

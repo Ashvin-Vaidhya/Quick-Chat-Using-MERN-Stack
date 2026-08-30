@@ -3,8 +3,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import {io} from "socket.io-client"
 
-const BackendUrl = import.meta.env.VITE_BACKEND_URL;
-axios.defaults.baseURL = BackendUrl;
+const BackendUrl = import.meta.env.VITE_BACKEND_URL || "";
+if (BackendUrl) {
+  axios.defaults.baseURL = BackendUrl;
+}
 
 export const AuthContext = createContext();
 
@@ -78,7 +80,7 @@ const updateProfile = async (body) => {
 
     const conectSocket = (userData) => {
       if(!userData || socket?.connected) return console.log("Not connected");
-      const newSocket = io(BackendUrl, {
+      const newSocket = io(BackendUrl || undefined, {
         query:{
             userId: userData._id,
         }

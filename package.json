@@ -1,0 +1,10 @@
+{
+  "name": "quick-chat-mern",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "npm install --prefix BackEnd/quichChat-backend && npm install --prefix FrontEnd/quichChat-fronEnd && npm run build --prefix FrontEnd/quichChat-fronEnd",
+    "start": "node BackEnd/quichChat-backend/index.js"
+  }
+}
