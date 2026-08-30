@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "npm install --prefix BackEnd/quichChat-backend && npm install --prefix FrontEnd/quichChat-fronEnd && npm run build --prefix FrontEnd/quichChat-fronEnd",
+    "build": "npm --prefix BackEnd/quichChat-backend install && npm --prefix FrontEnd/quichChat-fronEnd install && npm --prefix FrontEnd/quichChat-fronEnd run build",
     "start": "node BackEnd/quichChat-backend/index.js"
   }
 }
