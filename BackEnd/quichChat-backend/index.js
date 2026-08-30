@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import http from 'http';
 import path from 'path';
+import fs from 'fs';
 import { Server } from 'socket.io';
 import connectDB from './lib/conectDB.js';
 import userRouter from './routes/userRoutes.js';
@@ -55,7 +56,8 @@ app.use('/api/messages', messageRouter)
 
 // Serve frontend static assets in production
 if (process.env.NODE_ENV === "production") {
-  const frontendDistPath = path.join(__dirname, 'FrontEnd', 'quichChat-fronEnd', 'dist');
+  const rootDist = path.join(__dirname, 'dist');
+  const frontendDistPath = fs.existsSync(rootDist) ? rootDist : path.join(__dirname, 'FrontEnd', 'quichChat-fronEnd', 'dist');
   app.use(express.static(frontendDistPath));
   app.get('*', (req, res) => {
     res.sendFile(path.join(frontendDistPath, 'index.html'));

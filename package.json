@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "npm --prefix BackEnd/quichChat-backend install && npm --prefix FrontEnd/quichChat-fronEnd install && npm --prefix FrontEnd/quichChat-fronEnd run build",
+    "build": "npm --prefix BackEnd/quichChat-backend install && npm --prefix FrontEnd/quichChat-fronEnd install && npm --prefix FrontEnd/quichChat-fronEnd run build && node -e \"fs.cpSync('FrontEnd/quichChat-fronEnd/dist', './dist', {recursive: true})\"",
     "start": "node BackEnd/quichChat-backend/index.js"
   }
 }
