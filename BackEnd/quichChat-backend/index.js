@@ -42,7 +42,12 @@ io.on("connection", (socket) => {
 
 
 //middleware to parse data
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "token", "Authorization"]
+}));
 app.use(express.json({ limit: '4mb' }));
 app.use(express.urlencoded({ extended: false, limit: '4mb' }));
 app.use('/api/status', (req, res) => { res.json({ status: 'Server is running' }) });
